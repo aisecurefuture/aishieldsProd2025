@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>AiShields</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        
+        header {
+            background-color: #fff; /* White */
+            color: #1a2e4d; /* Navy Blue for text */
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center; /* Center the navigation bar links */
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1000; /* Ensure the header is above other elements */
+        }
+        
+        header .logo {
+            position: absolute;
+            left: 2rem;
+        }
+        
+        header .nav-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+        
+        header .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        header .nav-links a {
+            color: #1a2e4d; /* Navy Blue */
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            right: 2rem;
+            top: 1rem; /* Ensures it's aligned at the top */
+            z-index: 1001; /* Ensure it's above other elements */
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 2px;
+            background-color: #1a2e4d; /* Navy Blue */
+            margin: 4px 0;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #fff; /* White */
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .mobile-nav a {
+            display: block;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            color: #1a2e4d; /* Navy Blue */
+            text-decoration: none;
+        }
+        
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+            height: 50vh; /* Use a relative height for responsiveness */
+        }
+        
+        .carousel img,
+        .carousel video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image/video covers the entire container */
+            vertical-align: middle;
+        }
+        
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 46, 77, 0.8); /* Opaque Navy Blue */
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            pointer-events: none; /* Ensure the carousel-content does not block interactions */
+        }
+        
+        .carousel-content h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .carousel-content p {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        
+        .carousel-content .cta-button {
+            background-color: #800000; /* Maroon */
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            text-align: center;
+            pointer-events: auto; /* Re-enable interactions for the button */
+            line-height: 1.2;
+        }
+        
+        .carousel-content .cta-button:hover {
+            background-color: #660000; /* Darker Maroon */
+        }
+        
+        section {
+            padding: 4rem 2rem;
+            background-color: #fff;
+            margin: 1rem auto;
+            max-width: 1000px;
+            border-radius: 10px;
+        }
+        
+        section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #1a2e4d; /* Navy Blue */
+        }
+        
+        .problem ul,
+        .solution ul {
+            list-style: disc;
+            padding-left: 2rem;
+            color: #333;
+        }
+        
+        .solution p,
+        .problem ul,
+        .solution ul {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .register .register-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .register .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .register .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1a2e4d; /* Navy Blue */
+        }
+        
+        .register .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .register .cta-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #800000; /* Maroon */
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: normal;
+        }
+        
+        .register .cta-button:hover {
+            background-color: #660000; /* Darker Maroon */
+        }
+        
+        footer {
+            background-color: #1a2e4d; /* Navy Blue */
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        
+        footer p {
+            margin: 0;
+        }
+        
+        footer .footer-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        
+        footer .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        footer .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        
+        footer .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .mobile-nav {
+                display: none;
+            }
+        } 
+        .social-share {
+            display: flex;
+            gap: 10px;
+        }
+        .social-share a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 0 5px;
+        } 
+        .share-icon {
+            font-size: 24px;
+            color: #007bff;
+            cursor: pointer;
+            }         
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/index"><img src='/static/AIShieldHQ.PNG' alt='AiShields' style='height:46px;width:34px'/>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#problem">Problem</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="/newaccount">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="#"><a id="shareLink" href="#" class="share-icon">
+                    <i class="fas fa-share"></i>
+                    </a></li>
+                    <li><a href="https://chat.aishields.org"><img src='/static/AIShieldActivated.PNG' alt='AiShields' style='height:35px;width:35px'/>
+                    </a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMobileNav()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="#problem">Problem</a>
+                <a href="#solution">Solution</a>
+                <a href="/newaccount">Register</a>
+                <a href="/login">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="carousel">
+        <img src="/static/aishields.jpg" alt="AI Shields Carousel Image" />
+        <img src="/static/AiShieldsLogoWordsOnly.jpg" alt="AI Shields Carousel Image"/>
+        <img src="/static/GratitechResearch.jpg" alt="AI Shields Carousel Image"/>
+        <!--<video id="carousel-video" src="/static/exportedMP41-1887.MP4" autoplay muted></video>-->
+        <div class="carousel-content">
+            <h1>Experience Secure Generative AI with AI Shields</h1>
+            <p>Protect your data and enhance AI output security and accuracy with our cutting-edge AI security</p>
+            <a href="/newaccount" class="cta-button">Get Started for Free</a>
+        </div>
+    </div>
+
+    <section id="problem" class="problem">
+        <h2>The Problem</h2>
+        <ul>
+            <li>The rapid growth of Generative AI and LLMs has outpaced security measures.</li>
+            <li>Lack of oversight in AI tools leads to data privacy risks and misuse.</li>
+            <li>Implementation of security is often reactive, rather than proactive.</li>
+            <li>User trust is compromised, hindering AI adoption.</li>
+        </ul>
+    </section>
+
+    <section id="solution" class="solution">
+        <h2>The Solution: AI Shields</h2><center><img src='/static/AIShieldActivated.PNG' alt='AiShields' style='height:125px;width:125px'/>
+            <br/><a href="/index"><img src='/static/AiShieldsLogoWordsOnly.jpg' alt='AiShields' style='height:35px;width:200px'/>
+            </center>
+        <p>AI Shields provides an AI-augmented cyber defense system that protects data input and output. Key features include:</p>
+        <ul>
+            <li><strong>Prompt Injection Detection (PID)</strong></li>
+            <li><strong>Insecure Output Sanitization (IOS)</strong></li>
+            <li><strong>Model Denial of Service Protection (MDOSP)</strong></li>
+            <li><strong>Sensitive Information Sanitization (SIS)</strong></li>
+            <li><strong>Overreliance Source Finder (OSF)</strong></li>
+        </ul>
+        <p>Benefits:</p>
+        <ul>
+            <li>Ensures data privacy</li>
+            <li>Enhances AI output accuracy</li>
+            <li>Acknowledged by Data and AI industry experts</li>
+            <li>Robust security for users of LLMs and Generative AI</li>
+            <li>User-friendly and ensures data protection</li>
+            <li>Competitive edge in security and privacy</li>
+        </ul>
+        <p>For GenAI users interested in chatting with OpenAI ChatGPT, Anthropic Claude, Sonnet and Opus, Google Gemini 1.5, Perplexity.ai, and Llama models, AI Shields provides one seamless and secure UI for multiple GenAI providers and 13 different LLMs.</p>
+    </section>
+
+    <section id="register" class="register">
+        <h2>Join AI Shields Today</h2>
+        <a href="/newaccount" class="cta-button">Get Started for Free</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 <a href="https://Gratitech.com" style="color:silver;font-weight:bolder;">Gratitech</a>&nbsp;&amp;&nbsp;AI Shields. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#solution">Solution</a></li>
+            <li><a href="/newaccount">Register</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel img, .carousel video');
+        const totalItems = items.length;
+        let intervalId;
+
+        function showNextItem() {
+            items[currentIndex].style.display = 'none';
+            //if (items[currentIndex].tagName.toLowerCase() === 'video') {
+           //     items[currentIndex].pause();
+            //    items[currentIndex].currentTime = 0;
+            //}
+            currentIndex = (currentIndex + 1) % totalItems;
+            items[currentIndex].style.display = 'block';
+            //if (items[currentIndex].tagName.toLowerCase() === 'video') {
+            //    items[currentIndex].play();
+             //   items[currentIndex].addEventListener('ended', showNextItem, { once: true });
+            //    clearInterval(intervalId); // Stop the interval if a video is playing
+           // } else {
+              //  intervalId = setInterval(showNextItem, 5000); // Restart the interval for images
+           // }
+        }
+
+        function initCarousel() {
+            items.forEach((item, index) => {
+                if (index !== 0) item.style.display = 'none';
+            });
+            intervalId = setInterval(showNextItem, 5000);
+            // if (items[currentIndex].tagName.toLowerCase() === 'video') {
+            //     items[currentIndex].play();
+            //     items[currentIndex].addEventListener('ended', showNextItem, { once: true });
+            // } else {
+            //     intervalId = setInterval(showNextItem, 5000);
+            // }
+        }
+
+        document.addEventListener('DOMContentLoaded', initCarousel);
+
+        function toggleMobileNav() {
+            const mobileNav = document.getElementById('mobileNav');
+            if (mobileNav.style.display === 'block') {
+                mobileNav.style.display = 'none';
+            } else {
+                mobileNav.style.display = 'block';
+            }
+        }
+        document.getElementById("shareLink").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default link action
+
+        const currentUrl = "https://" + window.location.host; // Get the current URL
+        const shareUrl = `mailto:?subject=Check this out&amp;body=${encodeURIComponent(currentUrl)}`;
+        navigator.clipboard.writeText(currentUrl).then(function() {
+            alert("Share Link copied to clipboard!");
+        }, function() {
+            alert("Failed to copy Share Link to clipboard.");
+        });
+        // Open the mail client
+       // window.location.href = shareUrl;
+        });
+        // document.getElementById("shareLink2").addEventListener("click", function (event) {
+        //     event.preventDefault(); // Prevent the default link action
+    
+        //     const currentUrl = window.location.href; // Get the current URL
+        //     const shareUrl = `mailto:?subject=Check this out&amp;body=${encodeURIComponent(currentUrl)}`;
+        //     navigator.clipboard.writeText(currentUrl).then(function() {
+        //         alert("Share Link copied to clipboard!");
+        //     }, function() {
+        //         alert("Failed to copy Share Link to clipboard.");
+        //     });
+        //     // Open the mail client
+        //    // window.location.href = shareUrl;
+        //     });
+    </script>
+</body>
+</html>

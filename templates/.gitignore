@@ -1,0 +1,92 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+helpers/
+HELPERS/
+ENV/
+.env
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+*.cover
+coverage.xml
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# pipenv
+pipenv.lock
+
+# PEP 582; used by e.g. pdm
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+
+# SageMath
+*.sage.py
+
+# dotenv
+.env
+.env.*
+
+# virtualenv
+*.venv
+*.pem
+*.dll
+*.json
+security_config.py
+security_configOld.py
+old_security_config.py
+web.config
+*.config
+*.db
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# profiling data
+.prof
+
+# PyCharm
+.idea/
+*.iml
+
+# VSCode
+.vscode/

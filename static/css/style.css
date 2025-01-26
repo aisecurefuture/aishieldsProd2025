@@ -1,0 +1,51 @@
+/* Change the default link color */
+a {
+    color: navy; /* Custom color, e.g., tomato */
+}
+
+/* Optionally, change the hover color */
+a:hover {
+    color: maroon; /* Custom hover color, e.g., orange red */
+}
+option:checked {
+    background-color: navy;
+    color: white;
+    }
+select::after,::selection,::marker,::after {
+    background-color: navy;
+    color: red;
+    border-color: maroon;
+}
+.select.selected {
+    border-color: red; /* change border color to blue */
+    border: 3,solid,red;
+    appearance: none; /* Remove default arrow in Chrome, Safari, and Firefox */
+    -moz-appearance: none; /* Remove default arrow in Firefox */
+    -webkit-appearance: none; /* Remove default arrow in Safari and Chrome */
+    background-image: radial-gradient(circle, navy 45%, royalblue 48%);
+    background-image:  url("/static/AIShieldActivated.png");   
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 25px 25px;
+    background-color: navy;
+    /*contain: size;*/
+    color: silver;
+    
+    }
+    .select.deselected {
+    border-color: red; /* change border color to blue */
+    border: 3,solid,red;
+    appearance: none; /* Remove default arrow in Chrome, Safari, and Firefox */
+    -moz-appearance: none; /* Remove default arrow in Firefox */
+    -webkit-appearance: none; /* Remove default arrow in Safari and Chrome */
+
+    background-image: radial-gradient(circle, navy 45%, royalblue 48%);
+    background-image:  url("/static/AIShieldDeactivated.png");   
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 25px 25px;
+    background-color: navy;
+    /*contain: size;*/
+    color: red;
+    
+    }

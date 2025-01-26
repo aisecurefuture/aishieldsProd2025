@@ -1,0 +1,12 @@
+/.vscode
+/__pycache__
+/env
+/helpers
+/instance
+/old_security_config.py
+/recover_schema.py
+/run_waitress.py
+/run_waitress_add_model.py
+/security_config.py
+/security_configOld.py
+/web.config
