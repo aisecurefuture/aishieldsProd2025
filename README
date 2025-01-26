@@ -1,0 +1,2 @@
+1. Need a helper directory with PEM file to encrypt / decrypt your settings values stored in security_config.py in root
+2. need to install requirements.
