@@ -14,8 +14,8 @@ import base64
 from subprocess import Popen, PIPE
 
 app = Flask(__name__)
-strs3cr3txDLL = 'file://c:/inetpub/dev-aishields/helpers/s3cr3tx.dll'
-strPEMfileName = 'File://c:/inetpub/dev-aishields/helpers/Patrick-5e39e57f-0550-49f3-8db6-d33cd139168f.pem'
+strs3cr3txDLL = ''
+strPEMfileName = 'File://c://path/to/your/Cert.pem'
         
 # to_email = "recipient@example.com"
 # from_email = "your_email@example.com"
@@ -208,7 +208,7 @@ def compareHash(strInput,strInput2):
         print('An error occured: ' + str(err))   
         
 def enc(strInput):
-    with open('./helpers/Patrick-5e39e57f-0550-49f3-8db6-d33cd139168f.pem', mode='rb') as privatefile:
+    with open('./helpers/yourcert.pem', mode='rb') as privatefile:
         keydata = privatefile.read()
     privkey = rsa.PrivateKey.load_pkcs1(keydata)
     encbytes = rsa.encrypt(str(strInput).encode("utf-8",'ignore'),privkey) 
@@ -216,7 +216,7 @@ def enc(strInput):
     return strOutput 
 
 def dec(strInput):
-    with open('./helpers/Patrick-5e39e57f-0550-49f3-8db6-d33cd139168f.pem', mode='rb') as privatefile:
+    with open('./helpers/yourcert.pem', mode='rb') as privatefile:
         keydata = privatefile.read()
     privkey = rsa.PrivateKey.load_pkcs1(keydata)
     inputdecoded = base64.urlsafe_b64decode(strInput)
@@ -225,7 +225,7 @@ def dec(strInput):
     return strOutput
 
 def encStandard(strInput):
-    with open('./helpers/Patrick-5e39e57f-0550-49f3-8db6-d33cd139168f.pem', mode='rb') as privatefile:
+    with open('./helpers/yourcert.pem', mode='rb') as privatefile:
         keydata = privatefile.read()
     privkey = rsa.PrivateKey.load_pkcs1(keydata)
     encbytes = rsa.encrypt(str(strInput).encode("utf-8",'ignore'),privkey) 
@@ -233,7 +233,7 @@ def encStandard(strInput):
     return strOutput 
 
 def decStandard(strInput):
-    with open('./helpers/Patrick-5e39e57f-0550-49f3-8db6-d33cd139168f.pem', mode='rb') as privatefile:
+    with open('./helpers/yourcert.pem', mode='rb') as privatefile:
         keydata = privatefile.read()
     privkey = rsa.PrivateKey.load_pkcs1(keydata)
     inputdecoded = base64.standard_b64decode(strInput)
