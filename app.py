@@ -1247,11 +1247,15 @@ def verifyemail():
                         .order_by(desc(User.id)).first()
                     )
                     user.user_verified = 1
+                    user.subscribed = 1
                     db.session.add(user)
                     db.session.commit()
                     db.session.flush(objects=[user])
                     userName = str(user.first_name + " " + user.last_name)
-                    return render_template('subscribe.html', email=request.form.get("email"))
+                    flash("Code matched, Thank you! Please login!")
+                    return render_template('login.html', form=LoginForm())
+                
+                    #return render_template('subscribe.html', email=request.form.get("email"))
                 else:
                     flash("Code did not match, please try entering the code again")
                     return render_template('verifyemail.html', email=request.form.get("email"))
