@@ -1,4 +1,3 @@
-import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier
 
@@ -8,12 +7,13 @@ from nltk.stem.porter import PorterStemmer
 
 import string
 import os
+import fickling
 
 
 class Prompt_Injection_Sanitizer:
 	def __init__(self, modelFilepath, vectorizerFilepath):
-		self.vectorizer = pickle.load(open(vectorizerFilepath,'rb'))
-		self.model = pickle.load(open(modelFilepath,'rb'))
+		self.vectorizer = fickling.load(open(vectorizerFilepath,'rb'))
+		self.model = fickling.load(open(modelFilepath,'rb'))
 	
 	#returns the probability that a input prompt contains a particular prompt injection identifier
 	def get_confidence(self, input_prompt:str):
