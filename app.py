@@ -1224,7 +1224,7 @@ def verifyemail():
             # check recaptcha and for valid email:
             recaptcha_response = request.form.get('g-recaptcha-response')
             payload = {'secret': sc.GOOGLE_Recaptcha_Secret_Key, 'response': recaptcha_response}
-            response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload)
+            response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload, timeout=60)
             result = response.json()
             recaptchaSuccess = False
             if result.get('success'):
@@ -1277,7 +1277,7 @@ def reset():
             # check recaptcha and for valid email:
             recaptcha_response = request.form.get('g-recaptcha-response')
             payload = {'secret': sc.GOOGLE_Recaptcha_Secret_Key, 'response': recaptcha_response}
-            response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload)
+            response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload, timeout=60)
             result = response.json()
             recaptchaSuccess = False
             if result.get('success'):
@@ -1338,7 +1338,7 @@ def forgot():
               # check recaptcha and for valid email:
               recaptcha_response = request.form.get('g-recaptcha-response')
               payload = {'secret': sc.GOOGLE_Recaptcha_Secret_Key, 'response': recaptcha_response}
-              response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload)
+              response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload, timeout=60)
               result = response.json()
               recaptchaSuccess = False
               if result.get('success'):
@@ -1412,7 +1412,7 @@ def newaccount():
             # check recaptcha and for valid email:
             recaptcha_response = request.form.get('g-recaptcha-response')
             payload = {'secret': sc.GOOGLE_Recaptcha_Secret_Key, 'response': recaptcha_response}
-            response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload)
+            response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload, timeout=60)
             result = response.json()
             recaptchaSuccess = False
             if result.get('success'):
@@ -1797,7 +1797,7 @@ def profile():
             # check recaptcha and for valid email:
             recaptcha_response = request.form.get('g-recaptcha-response')
             payload = {'secret': sc.GOOGLE_Recaptcha_Secret_Key, 'response': recaptcha_response}
-            response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload)
+            response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload, timeout=60)
             result = response.json()
             recaptchaSuccess = False
             if result.get('success'):
@@ -1884,7 +1884,7 @@ def login():
                 # check recaptcha and for valid email:
                 recaptcha_response = request.form.get('g-recaptcha-response')
                 payload = {'secret': sc.GOOGLE_Recaptcha_Secret_Key, 'response': recaptcha_response}
-                response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload)
+                response = requests.post("https://www.google.com/recaptcha/api/siteverify", data=payload, timeout=60)
                 result = response.json()
                 recaptchaSuccess = False
                 if result.get('success'):
