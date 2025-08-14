@@ -1,5 +1,7 @@
 from rake_nltk import Rake
 import nltk
+from security import safe_requests
+
 nltk.data.path.append('C:/Users/pk/AppData/Roaming/nltk_data')
 import re
 
@@ -102,7 +104,7 @@ class OverrelianceDataSanitizer():
     def search_and_scrape_2(self, link, search_string, delay=0, timeout=5):
         
         query_link = link + f'/search?q={search_string}'
-        response = requests.get(query_link, headers=self.headers, timeout=timeout)
+        response = safe_requests.get(query_link, headers=self.headers, timeout=timeout)
         
         time.sleep(delay)
         
@@ -360,7 +362,7 @@ class OverrelianceDataSanitizer():
                 print("scraping:",link)
                     
                 try:
-                    response = requests.get(link, headers=self.headers, timeout=timeout)
+                    response = safe_requests.get(link, headers=self.headers, timeout=timeout)
                     html_content = response.content
 
                     #quick and dirty, but not great
